@@ -16,8 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="EGM-D2-oJI">
+                                <rect key="frame" x="10" y="98" width="394" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gbh-6t-0Ko">
-                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
+                                <rect key="frame" x="0.0" y="159" width="414" height="703"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="fzJ-Zs-ewh" detailTextLabel="Afe-Hr-V7q" style="IBUITableViewCellStyleSubtitle" id="bfR-jB-9us">
@@ -46,35 +50,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="カテゴリ検索" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qnM-0a-NYu">
-                                <rect key="frame" x="10" y="98" width="334" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eD-Jd-poD">
-                                <rect key="frame" x="354" y="98" width="50" height="30"/>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="dAu-Fb-MNi"/>
-                                </constraints>
-                                <state key="normal" title="検索"/>
-                                <connections>
-                                    <action selector="searchCategoryButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R5J-2X-flo"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qnM-0a-NYu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="1P2-E2-Ew9"/>
-                            <constraint firstItem="8eD-Jd-poD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Dbh-W7-v4m"/>
-                            <constraint firstItem="Gbh-6t-0Ko" firstAttribute="top" secondItem="8eD-Jd-poD" secondAttribute="bottom" constant="10" id="IlW-xi-TDd"/>
+                            <constraint firstItem="EGM-D2-oJI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="0Hn-yj-5bm"/>
                             <constraint firstItem="Gbh-6t-0Ko" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Pzj-b1-EDw"/>
+                            <constraint firstItem="Gbh-6t-0Ko" firstAttribute="top" secondItem="EGM-D2-oJI" secondAttribute="bottom" constant="10" id="STq-fh-Mlk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gbh-6t-0Ko" secondAttribute="trailing" id="XKl-b9-Qi7"/>
-                            <constraint firstItem="qnM-0a-NYu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="YAg-Rj-LSY"/>
-                            <constraint firstItem="8eD-Jd-poD" firstAttribute="leading" secondItem="qnM-0a-NYu" secondAttribute="trailing" constant="10" id="Yxl-I5-Fjy"/>
+                            <constraint firstItem="EGM-D2-oJI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="h1P-tD-ue4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Gbh-6t-0Ko" secondAttribute="bottom" id="i4n-oA-grN"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8eD-Jd-poD" secondAttribute="trailing" constant="10" id="xjg-DB-ycy"/>
+                            <constraint firstAttribute="trailing" secondItem="EGM-D2-oJI" secondAttribute="trailing" constant="10" id="nC0-dN-086"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zHW-Iz-uo2">
@@ -85,7 +71,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="categoryTextField" destination="qnM-0a-NYu" id="b5H-Qb-1Oy"/>
+                        <outlet property="searchBar" destination="EGM-D2-oJI" id="V4w-O9-8CR"/>
                         <outlet property="tableView" destination="Gbh-6t-0Ko" id="6Ev-Bc-KWh"/>
                         <segue destination="hA9-Rx-hGl" kind="show" identifier="cellSegue" id="kTz-Hh-JqC"/>
                     </connections>
@@ -214,9 +200,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

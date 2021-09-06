@@ -8,10 +8,10 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var categoryTextField: UITextField!
+    @IBOutlet weak var searchBar: UISearchBar!
     // Realmインスタンスを取得する
    
     let realm = try! Realm()
@@ -25,18 +25,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
     }
-   
-    @IBAction func searchCategoryButton(_ sender: Any) {
-        let category = categoryTextField.text
-        print(category as Any)
-        if category != "" {
-            taskArray = try! Realm().objects(Task.self).filter("category == '\(category ?? " ")'")
-        } else {
-            taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let category = searchBar.text {
+            // デバッグエリアに出力
+            if category != "" {
+                taskArray = try! Realm().objects(Task.self).filter("category == '\(category)'")
+            } else {
+                taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+            }
+
+            tableView.reloadData()
         }
-       
-        tableView?.reloadData()
     }
     // データの数（＝セルの数）を返すメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
