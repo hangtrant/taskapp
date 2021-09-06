@@ -31,7 +31,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let category = searchBar.text {
             // デバッグエリアに出力
             if category != "" {
-                taskArray = try! Realm().objects(Task.self).filter("category == '\(category)'")
+                let predicate = NSPredicate(format: "category = %@", "\(category)")
+                taskArray = try! Realm().objects(Task.self).filter(predicate)
             } else {
                 taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
             }
@@ -65,14 +66,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // 各セルを選択した時に実行されるメソッド
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
-    }
-    // 各セルを選択した時に実行されるメソッド
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "cellSegue",sender: nil)
     }
+    
     // セルが削除が可能なことを伝えるメソッド
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    // Delete ボタンが押された時に呼ばれるメソッド
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // 削除するタスクを取得する
